@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pricer/Features/completed_projects/presentation/views/completed_projects_view.dart';
+import 'package:pricer/core/utils/check_screen_view.dart';
 
 class DoneRow extends StatelessWidget {
   const DoneRow({
@@ -9,10 +10,9 @@ class DoneRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment:
-          ModalRoute.of(context)?.settings.name == CompletedProjectsView.id
-              ? MainAxisAlignment.center
-              : MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: isCompletedView(context)
+          ? MainAxisAlignment.center
+          : MainAxisAlignment.spaceBetween,
       children: [
         const Text(
           'Completed Projects',
@@ -20,7 +20,7 @@ class DoneRow extends StatelessWidget {
             fontSize: 22,
           ),
         ),
-        ModalRoute.of(context)?.settings.name == CompletedProjectsView.id
+        isCompletedView(context)
             ? const SizedBox()
             : InkWell(
                 onTap: () {

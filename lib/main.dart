@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pricer/Features/completed_projects/presentation/views/completed_projects_view.dart';
 import 'package:pricer/Features/home/presentation/views/home_view.dart';
+import 'package:pricer/Features/pending_projects/presentation/views/pending_projects_view.dart';
 
 void main() {
   runApp(const PricerApp());
@@ -12,8 +13,11 @@ class PricerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/home',
       routes: {
-        CompletedProjectsView.id: (context) => const CompletedProjectsView()
+        '/home': (context) => const HomeView(),
+        CompletedProjectsView.id: (context) => const CompletedProjectsView(),
+        PendingProjectsView.id: (context) => const PendingProjectsView(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark()
