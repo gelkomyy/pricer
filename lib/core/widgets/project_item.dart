@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pricer/constans.dart';
 
 class ProjectItem extends StatelessWidget {
   const ProjectItem({super.key, this.iconData = Icons.hourglass_bottom});
@@ -8,7 +9,7 @@ class ProjectItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: const Color(0xff232329),
+        color: kSecondColor,
       ),
       height: 160,
       width: 210,
@@ -20,7 +21,7 @@ class ProjectItem extends StatelessWidget {
             const Spacer(),
             Icon(
               iconData,
-              color: const Color(0xff3675E5),
+              color: kSecond3Color,
             ),
             const SizedBox(
               height: 10,
@@ -50,7 +51,7 @@ class ProjectItem extends StatelessWidget {
                   height: 30,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff3675E5),
+                      backgroundColor: kSecond3Color,
                     ),
                     onPressed: () {},
                     child: const Text(

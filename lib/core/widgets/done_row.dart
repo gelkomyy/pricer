@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pricer/Features/completed_projects/presentation/views/completed_projects_view.dart';
+import 'package:pricer/constans.dart';
 import 'package:pricer/core/utils/check_screen_view.dart';
 
 class DoneRow extends StatelessWidget {
@@ -29,7 +30,7 @@ class DoneRow extends StatelessWidget {
                 child: const Text(
                   'See all',
                   style: TextStyle(
-                    color: Color(0xffF47148),
+                    color: kSecond2Color,
                     fontSize: 20,
                   ),
                 ),
