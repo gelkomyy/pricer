@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pricer/Features/home/presentation/views/widgets/project_item.dart';
 import 'package:pricer/core/utils/check_screen_view.dart';
+import 'package:pricer/core/widgets/project_item.dart';
 
 class ProjectsGridPending extends StatelessWidget {
   const ProjectsGridPending({super.key});

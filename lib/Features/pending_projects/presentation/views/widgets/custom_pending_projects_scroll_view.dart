@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pricer/Features/home/presentation/views/widgets/custom_search_box.dart';
-import 'package:pricer/Features/home/presentation/views/widgets/pending_row.dart';
-import 'package:pricer/Features/home/presentation/views/widgets/project_grid_pending.dart';
+import 'package:pricer/core/widgets/custom_search_box.dart';
+import 'package:pricer/core/widgets/pending_row.dart';
+import 'package:pricer/core/widgets/project_grid_pending.dart';
 
 class CustomPendingProjectsScrollView extends StatelessWidget {
   const CustomPendingProjectsScrollView({

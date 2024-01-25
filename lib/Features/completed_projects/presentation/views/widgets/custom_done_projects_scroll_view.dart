@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pricer/Features/home/presentation/views/widgets/custom_search_box.dart';
-import 'package:pricer/Features/home/presentation/views/widgets/done_row.dart';
-import 'package:pricer/Features/home/presentation/views/widgets/project_grid_done.dart';
+import 'package:pricer/core/widgets/custom_search_box.dart';
+import 'package:pricer/core/widgets/done_row.dart';
+import 'package:pricer/core/widgets/project_grid_done.dart';
 
 class CustomDoneProjectsScrollView extends StatelessWidget {
   const CustomDoneProjectsScrollView({
