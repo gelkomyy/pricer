@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pricer/Features/completed_projects/presentation/views/completed_projects_view.dart';
 
 class DoneRow extends StatelessWidget {
   const DoneRow({
@@ -8,7 +9,10 @@ class DoneRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment:
+          ModalRoute.of(context)?.settings.name == CompletedProjectsView.id
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.spaceBetween,
       children: [
         const Text(
           'Completed Projects',
@@ -16,16 +20,20 @@ class DoneRow extends StatelessWidget {
             fontSize: 22,
           ),
         ),
-        InkWell(
-          onTap: () {},
-          child: const Text(
-            'See all',
-            style: TextStyle(
-              color: Color(0xffF47148),
-              fontSize: 20,
-            ),
-          ),
-        ),
+        ModalRoute.of(context)?.settings.name == CompletedProjectsView.id
+            ? const SizedBox()
+            : InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, CompletedProjectsView.id);
+                },
+                child: const Text(
+                  'See all',
+                  style: TextStyle(
+                    color: Color(0xffF47148),
+                    fontSize: 20,
+                  ),
+                ),
+              ),
       ],
     );
   }
