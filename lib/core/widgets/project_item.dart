@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pricer/Features/project_details/presentation/views/project_details_view.dart';
 import 'package:pricer/constans.dart';
 
 class ProjectItem extends StatelessWidget {
@@ -53,7 +54,9 @@ class ProjectItem extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kSecond3Color,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, ProjectDetailsView.id);
+                    },
                     child: const Text(
                       'View',
                       style: TextStyle(fontSize: 16, color: Colors.white),
