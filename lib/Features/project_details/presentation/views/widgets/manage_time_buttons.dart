@@ -20,7 +20,7 @@ class ManageTimeButtons extends StatelessWidget {
           ),
         ),
         Icon(
-          Icons.stop_circle,
+          Icons.play_circle,
           color: kSecond3Color,
           size: 80,
         ),
