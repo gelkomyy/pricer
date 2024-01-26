@@ -3,33 +3,52 @@ import 'package:flutter/services.dart';
 import 'package:pricer/constans.dart';
 
 class CustomNumBox extends StatelessWidget {
-  const CustomNumBox({super.key, required this.text, required this.iconData});
+  const CustomNumBox(
+      {super.key,
+      required this.text,
+      required this.iconData,
+      required this.controller,
+      required this.formKey});
   final String text;
   final IconData iconData;
+  final TextEditingController controller;
+  final GlobalKey<FormState> formKey;
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      keyboardType: const TextInputType.numberWithOptions(decimal: true),
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,4}$'))
-      ],
-      cursorHeight: 15,
-      cursorOpacityAnimates: true,
-      cursorColor: kSecond3Color,
-      style: const TextStyle(
-        height: 0.7,
-        color: Colors.black,
-      ),
-      decoration: InputDecoration(
-        fillColor: Colors.white,
-        filled: true,
-        prefixIcon: Icon(iconData),
-        hintText: text,
-        hintStyle: TextStyle(color: Colors.black.withOpacity(0.4)),
-        prefixIconColor: Colors.black.withOpacity(0.6),
-        border: mainBorder(),
-        focusedBorder: focusBorder(),
-        enabledBorder: mainBorder(),
+    return Form(
+      key: formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter a value';
+          }
+          return null;
+        },
+        controller: controller,
+        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,4}$'))
+        ],
+        cursorHeight: 15,
+        cursorOpacityAnimates: true,
+        cursorColor: kSecond3Color,
+        style: const TextStyle(
+          height: 0.7,
+          color: Colors.black,
+        ),
+        decoration: InputDecoration(
+          fillColor: Colors.white,
+          filled: true,
+          prefixIcon: Icon(iconData),
+          hintText: text,
+          hintStyle: TextStyle(color: Colors.black.withOpacity(0.4)),
+          prefixIconColor: Colors.black.withOpacity(0.6),
+          border: mainBorder(),
+          focusedBorder: focusBorder(),
+          enabledBorder: mainBorder(),
+        ),
       ),
     );
   }

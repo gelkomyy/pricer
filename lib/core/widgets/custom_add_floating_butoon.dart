@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:pricer/constans.dart';
 import 'package:pricer/core/widgets/custom_num_box.dart';
-import 'package:pricer/core/widgets/custom_search_box.dart';
 import 'package:pricer/core/widgets/custom_text_field.dart';
 
-class CustomAddFloatingButton extends StatelessWidget {
+class CustomAddFloatingButton extends StatefulWidget {
   const CustomAddFloatingButton({
     super.key,
   });
 
+  @override
+  State<CustomAddFloatingButton> createState() =>
+      _CustomAddFloatingButtonState();
+}
+
+class _CustomAddFloatingButtonState extends State<CustomAddFloatingButton> {
+  final List<GlobalKey<FormState>> _formKeys = [
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+  ];
+  final List<TextEditingController> _controllers = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -45,21 +60,27 @@ class CustomAddFloatingButton extends StatelessWidget {
                           const SizedBox(
                             height: 50,
                           ),
-                          const CustomTextBox(
+                          CustomTextBox(
+                            formKey: _formKeys[0],
+                            controller: _controllers[0],
                             text: 'Project name',
                             iconData: Icons.pending,
                           ),
                           const SizedBox(
                             height: 30,
                           ),
-                          const CustomTextBox(
+                          CustomTextBox(
+                            formKey: _formKeys[1],
+                            controller: _controllers[1],
                             iconData: Icons.account_circle,
                             text: 'Client name',
                           ),
                           const SizedBox(
                             height: 30,
                           ),
-                          const CustomNumBox(
+                          CustomNumBox(
+                            formKey: _formKeys[2],
+                            controller: _controllers[2],
                             text: 'Price per hour',
                             iconData: Icons.paid,
                           ),
@@ -71,7 +92,21 @@ class CustomAddFloatingButton extends StatelessWidget {
                                   fixedSize: const Size(150, 30),
                                   backgroundColor: kSecond2Color),
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                bool isValid = true;
+                                for (var formKey in _formKeys) {
+                                  if (!(formKey.currentState!.validate())) {
+                                    isValid = false;
+
+                                    /*  ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                            content: Text('Processing Data'))); */
+                                  }
+                                }
+
+                                // If all forms are valid, perform further actions
+                                if (isValid) {
+                                  Navigator.of(context).pop();
+                                }
                               },
                               child: const Text(
                                 'Add √',
