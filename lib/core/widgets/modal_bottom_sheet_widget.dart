@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pricer/constans.dart';
 import 'package:pricer/core/widgets/custom_num_box.dart';
 import 'package:pricer/core/widgets/custom_text_field.dart';
 import 'package:pricer/core/widgets/cutomize_add_button.dart';
