@@ -46,4 +46,15 @@ class DatabaseHelper {
       );
     });
   }
+
+  //
+
+  Future<void> updateData(ProjectModel model) async {
+    await _database.update(
+      'projects',
+      model.toMap(),
+      where: 'id = ?',
+      whereArgs: [model.id],
+    );
+  }
 }
