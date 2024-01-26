@@ -23,6 +23,7 @@ class DatabaseHelper {
 
   Future<void> insertData(ProjectModel model) async {
     // Insert data into the table
+
     await _database.insert(
       'projects',
       model.toMap(), // Convert your model to a map
