@@ -8,6 +8,7 @@ class ProjectDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: kPrimaryColor,
       body: SafeArea(child: ProjectDetailsViewBody()),
     );
