@@ -7,14 +7,15 @@ class ProjectModel {
   num totalHours;
   num pricePerHour;
 
-  ProjectModel(
-      {required this.pricePerHour,
-      required this.id,
-      required this.status,
-      required this.projectName,
-      required this.clientName,
-      required this.totalPrice,
-      required this.totalHours});
+  ProjectModel({
+    required this.pricePerHour,
+    required this.id,
+    required this.status,
+    required this.projectName,
+    required this.clientName,
+    required this.totalPrice,
+    required this.totalHours,
+  });
 
   Map<String, dynamic> toMap() {
     return {

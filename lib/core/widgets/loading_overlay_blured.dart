@@ -6,12 +6,10 @@ class LoadingOverlay extends StatelessWidget {
   final Widget child;
   final bool isLoading;
 
-  final Color color;
-
-  LoadingOverlay({
+  const LoadingOverlay({
+    super.key,
     required this.child,
     required this.isLoading,
-    this.color = Colors.black,
   });
 
   @override
@@ -26,7 +24,7 @@ class LoadingOverlay extends StatelessWidget {
                     child: ImageFiltered(
                       imageFilter: ImageFilter.blur(sigmaX: 1.3, sigmaY: 1.3),
                       child: Container(
-                          color: color,
+                          color: Colors.black,
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height,
                           child: child),

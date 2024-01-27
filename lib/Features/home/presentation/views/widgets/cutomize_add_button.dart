@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
 import 'package:pricer/constans.dart';
 import 'package:pricer/core/models/project_model.dart';
+import 'package:pricer/core/utils/status_project.dart';
 import 'package:pricer/core/widgets/custom_snackbar.dart';
 
 class CuromizeAddButton extends StatelessWidget {
@@ -48,7 +49,7 @@ class CuromizeAddButton extends StatelessWidget {
           ProjectModel(
               pricePerHour: pricePerHour,
               id: lastId + 1,
-              status: 'pending',
+              status: ProjectStatus.pending,
               projectName: projectName,
               clientName: clientName,
               totalPrice: 0,

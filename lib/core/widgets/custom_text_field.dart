@@ -4,14 +4,16 @@ import 'package:pricer/constans.dart';
 class CustomTextBox extends StatelessWidget {
   const CustomTextBox({
     super.key,
-    required this.text,
+    required this.hintText,
     required this.iconData,
     required this.controller,
     required this.formKey,
   });
-  final String text;
+
+  final String hintText;
   final IconData iconData;
   final TextEditingController controller;
+
   final GlobalKey<FormState> formKey;
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class CustomTextBox extends StatelessWidget {
           fillColor: Colors.white,
           filled: true,
           prefixIcon: Icon(iconData),
-          hintText: text,
+          hintText: hintText,
           hintStyle: TextStyle(color: Colors.black.withOpacity(0.4)),
           prefixIconColor: Colors.black.withOpacity(0.6),
           border: mainBorder(),

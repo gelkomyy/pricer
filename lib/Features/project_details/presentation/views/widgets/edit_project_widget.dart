@@ -25,6 +25,10 @@ class _EditProjectState extends State<EditProject> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        _controllers[0].text = widget.projectModel.projectName;
+        _controllers[1].text = widget.projectModel.clientName;
+        _controllers[2].text = widget.projectModel.pricePerHour.toString();
+
         showModalBottomSheet(
             isScrollControlled: true,
             backgroundColor: kPrimaryColor,

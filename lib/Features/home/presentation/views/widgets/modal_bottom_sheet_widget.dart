@@ -40,7 +40,7 @@ class ModalBottomSheetWidget extends StatelessWidget {
             CustomTextBox(
               formKey: _formKeys[0],
               controller: _controllers[0],
-              text: 'Project name',
+              hintText: 'Project name',
               iconData: Icons.pending,
             ),
             const SizedBox(
@@ -50,7 +50,7 @@ class ModalBottomSheetWidget extends StatelessWidget {
               formKey: _formKeys[1],
               controller: _controllers[1],
               iconData: Icons.account_circle,
-              text: 'Client name',
+              hintText: 'Client name',
             ),
             const SizedBox(
               height: 30,
@@ -58,7 +58,7 @@ class ModalBottomSheetWidget extends StatelessWidget {
             CustomNumBox(
               formKey: _formKeys[2],
               controller: _controllers[2],
-              text: 'Price per hour',
+              hintText: 'Price per hour',
               iconData: Icons.paid,
             ),
             const SizedBox(

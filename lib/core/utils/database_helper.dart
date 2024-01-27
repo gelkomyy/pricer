@@ -2,8 +2,7 @@ import 'package:pricer/core/models/project_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:sqflite_common/sqlite_api.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart' as sqflite_ffi;
+//import 'package:sqflite_common/sqlite_api.dart';
 
 class DatabaseHelper {
   late Database _database;
@@ -63,6 +62,16 @@ class DatabaseHelper {
       model.toMap(),
       where: 'id = ?',
       whereArgs: [model.id],
+    );
+  }
+
+//
+
+  Future<void> deleteModel(int id) async {
+    await _database.delete(
+      'projects',
+      where: 'id = ?',
+      whereArgs: [id],
     );
   }
 

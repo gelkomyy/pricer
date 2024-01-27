@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
 import 'package:pricer/core/models/project_model.dart';
 import 'package:pricer/core/utils/check_screen_view.dart';
+import 'package:pricer/core/utils/status_project.dart';
 import 'package:pricer/core/widgets/project_item.dart';
 
 class ProjectsGridPending extends StatefulWidget {
@@ -24,8 +25,9 @@ class _ProjectsGridPendingState extends State<ProjectsGridPending> {
         }
       },
       builder: (context, state) {
-        List<ProjectModel> pendingProjects =
-            projects.where((model) => model.status == 'pending').toList();
+        List<ProjectModel> pendingProjects = projects
+            .where((model) => model.status == ProjectStatus.pending)
+            .toList();
         if (pendingProjects.isEmpty) {
           return const SliverToBoxAdapter(
             child: Center(
@@ -47,7 +49,7 @@ class _ProjectsGridPendingState extends State<ProjectsGridPending> {
             itemBuilder: ((context, index) {
               return ProjectItem(
                 projectModel: pendingProjects[index],
-                iconData: pendingProjects[index].status == 'pending'
+                iconData: pendingProjects[index].status == ProjectStatus.pending
                     ? Icons.hourglass_bottom
                     : Icons.task_alt,
               );

@@ -19,7 +19,6 @@ class _CustomDoneProjectsScrollViewState
     extends State<CustomDoneProjectsScrollView> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     BlocProvider.of<ManageProjectsCubit>(context).initializeDatabase();
   }
