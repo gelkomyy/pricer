@@ -1,35 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
+import 'package:pricer/Features/project_details/presentation/manager/time_counter_cubit/time_counter_cubit.dart';
 import 'package:pricer/constans.dart';
+import 'package:pricer/core/models/project_model.dart';
+import 'package:pricer/core/utils/status_project.dart';
 
 class ManageTimeButtons extends StatelessWidget {
   const ManageTimeButtons({
     super.key,
+    required this.projectModel,
   });
-
+  final ProjectModel projectModel;
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Card(
-          color: kSecond3Color,
-          child: Icon(
-            Icons.refresh,
-            color: kPrimaryColor,
-            size: 35,
+        InkWell(
+          onTap: () {
+            BlocProvider.of<TimeCounterCubit>(context).resetTime();
+          },
+          child: const Card(
+            color: kSecond3Color,
+            child: Icon(
+              Icons.refresh,
+              color: kPrimaryColor,
+              size: 35,
+            ),
           ),
         ),
-        Icon(
-          Icons.play_circle,
-          color: kSecond3Color,
-          size: 80,
+        BlocBuilder<TimeCounterCubit, TimeCounterState>(
+          builder: (context, state) {
+            return InkWell(
+              onTap: () {
+                BlocProvider.of<TimeCounterCubit>(context).playTime();
+              },
+              child: Icon(
+                BlocProvider.of<TimeCounterCubit>(context).stopwatch.isRunning
+                    ? Icons.pause_circle
+                    : Icons.play_circle,
+                color: kSecond3Color,
+                size: 80,
+              ),
+            );
+          },
         ),
-        Card(
-          color: kSecond3Color,
-          child: Icon(
-            Icons.check,
-            color: kPrimaryColor,
-            size: 45,
+        InkWell(
+          onTap: () {
+            projectModel.status = ProjectStatus.completed;
+            BlocProvider.of<TimeCounterCubit>(context).stopTime();
+            BlocProvider.of<ManageProjectsCubit>(context)
+                .editProject(projectModel);
+          },
+          child: const Card(
+            color: kSecond3Color,
+            child: Icon(
+              Icons.check,
+              color: kPrimaryColor,
+              size: 45,
+            ),
           ),
         ),
       ],

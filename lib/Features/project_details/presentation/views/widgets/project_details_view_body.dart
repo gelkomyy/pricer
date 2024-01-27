@@ -5,6 +5,7 @@ import 'package:pricer/Features/project_details/presentation/views/widgets/custo
 import 'package:pricer/Features/project_details/presentation/views/widgets/manage_time_buttons.dart';
 import 'package:pricer/Features/project_details/presentation/views/widgets/time_counter.dart';
 import 'package:pricer/core/models/project_model.dart';
+import 'package:pricer/core/utils/status_project.dart';
 
 class ProjectDetailsViewBody extends StatelessWidget {
   const ProjectDetailsViewBody({super.key, required this.projectModel});
@@ -56,7 +57,9 @@ class ProjectDetailsViewBody extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              const TimeCounter(),
+              TimeCounter(
+                projectModel: projectModel,
+              ),
               const SizedBox(
                 height: 30,
               ),
@@ -68,7 +71,19 @@ class ProjectDetailsViewBody extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              const ManageTimeButtons(),
+              projectModel.status == ProjectStatus.pending
+                  ? ManageTimeButtons(
+                      projectModel: projectModel,
+                    )
+                  : const Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 30),
+                        child: Text(
+                          'Completed Project √',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ),
               const SizedBox(
                 height: 30,
               ),
