@@ -1,13 +1,15 @@
 class ProjectModel {
   final int id;
-  final String status;
-  final String projectName;
-  final String clientName;
-  final num totalPrice;
-  final num totalHours;
+  String status;
+  String projectName;
+  String clientName;
+  num totalPrice;
+  num totalHours;
+  num pricePerHour;
 
-  const ProjectModel(
-      {required this.id,
+  ProjectModel(
+      {required this.pricePerHour,
+      required this.id,
       required this.status,
       required this.projectName,
       required this.clientName,
@@ -22,6 +24,7 @@ class ProjectModel {
       'clientName': clientName,
       'totalPrice': totalPrice,
       'totalHours': totalHours,
+      'pricePerHour': pricePerHour,
     };
   }
 }

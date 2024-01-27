@@ -1,18 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
+import 'package:pricer/core/models/project_model.dart';
 import 'package:pricer/core/utils/check_screen_view.dart';
 import 'package:pricer/core/widgets/project_item.dart';
 
-class ProjectsGridPending extends StatelessWidget {
+class ProjectsGridPending extends StatefulWidget {
   const ProjectsGridPending({super.key});
 
   @override
+  State<ProjectsGridPending> createState() => _ProjectsGridPendingState();
+}
+
+class _ProjectsGridPendingState extends State<ProjectsGridPending> {
+  List<ProjectModel> projects = [];
+
+  @override
   Widget build(BuildContext context) {
-    return SliverGrid.builder(
-        itemCount: isPendingView(context) ? 10 : 4,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 10),
-        itemBuilder: ((context, index) {
-          return const ProjectItem();
-        }));
+    return BlocConsumer<ManageProjectsCubit, ManageProjectsState>(
+      listener: (context, state) {
+        if (state is GetProjectsDone) {
+          projects = BlocProvider.of<ManageProjectsCubit>(context).projects;
+        }
+      },
+      builder: (context, state) {
+        List<ProjectModel> pendingProjects =
+            projects.where((model) => model.status == 'pending').toList();
+        if (pendingProjects.isEmpty) {
+          return const SliverToBoxAdapter(
+            child: Center(
+              child: Text(
+                'No data!',
+                style: TextStyle(fontSize: 32),
+              ),
+            ),
+          );
+        } else {
+          return SliverGrid.builder(
+            itemCount: isPendingView(context)
+                ? pendingProjects.length
+                : pendingProjects.length > 4
+                    ? 4
+                    : pendingProjects.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 10),
+            itemBuilder: ((context, index) {
+              return ProjectItem(
+                projectModel: pendingProjects[index],
+                iconData: pendingProjects[index].status == 'pending'
+                    ? Icons.hourglass_bottom
+                    : Icons.task_alt,
+              );
+            }),
+          );
+        }
+      },
+    );
   }
 }

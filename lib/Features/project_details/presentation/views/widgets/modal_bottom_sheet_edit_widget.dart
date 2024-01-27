@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pricer/Features/project_details/presentation/views/widgets/cutomize_edit_button.dart';
+import 'package:pricer/core/models/project_model.dart';
 import 'package:pricer/core/widgets/custom_num_box.dart';
 import 'package:pricer/core/widgets/custom_text_field.dart';
 
@@ -8,9 +9,10 @@ class ModalBottomSheetEditWidget extends StatelessWidget {
     super.key,
     required List<GlobalKey<FormState>> formKeys,
     required List<TextEditingController> controllers,
+    required this.projectModel,
   })  : _formKeys = formKeys,
         _controllers = controllers;
-
+  final ProjectModel projectModel;
   final List<GlobalKey<FormState>> _formKeys;
   final List<TextEditingController> _controllers;
 
@@ -40,7 +42,7 @@ class ModalBottomSheetEditWidget extends StatelessWidget {
             CustomTextBox(
               formKey: _formKeys[0],
               controller: _controllers[0],
-              text: 'Project name',
+              text: projectModel.projectName,
               iconData: Icons.pending,
             ),
             const SizedBox(
@@ -50,7 +52,7 @@ class ModalBottomSheetEditWidget extends StatelessWidget {
               formKey: _formKeys[1],
               controller: _controllers[1],
               iconData: Icons.account_circle,
-              text: 'Client name',
+              text: projectModel.clientName,
             ),
             const SizedBox(
               height: 30,
@@ -58,13 +60,17 @@ class ModalBottomSheetEditWidget extends StatelessWidget {
             CustomNumBox(
               formKey: _formKeys[2],
               controller: _controllers[2],
-              text: 'Price per hour',
+              text: projectModel.pricePerHour.toString(),
               iconData: Icons.paid,
             ),
             const SizedBox(
               height: 30,
             ),
-            CuromizeEditButton(formKeys: _formKeys),
+            CuromizeEditButton(
+              formKeys: _formKeys,
+              controllers: _controllers,
+              projectModel: projectModel,
+            ),
             const SizedBox(
               height: 20,
             ),

@@ -1,6 +1,9 @@
 import 'package:pricer/core/models/project_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common/sqlite_api.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart' as sqflite_ffi;
 
 class DatabaseHelper {
   late Database _database;
@@ -8,11 +11,14 @@ class DatabaseHelper {
 //
   Future<void> initializeDatabase() async {
     // Open the database and create tables if not exists
+    /* sqflite_ffi.sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+ */
     _database = await openDatabase(
       join(await getDatabasesPath(), 'my_projects.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE projects(id INTEGER PRIMARY KEY, status TEXT, projectName TEXT, clientName TEXT, totalPrice REAL, totalHours REAL)',
+          'CREATE TABLE projects(id INTEGER PRIMARY KEY, status TEXT, projectName TEXT, clientName TEXT, totalPrice REAL, totalHours REAL, pricePerHour REAL)',
         );
       },
       version: 1,
@@ -44,6 +50,7 @@ class DatabaseHelper {
         clientName: maps[index]['clientName'],
         totalPrice: maps[index]['totalPrice'],
         totalHours: maps[index]['totalHours'],
+        pricePerHour: maps[index]['pricePerHour'],
       );
     });
   }
@@ -57,5 +64,20 @@ class DatabaseHelper {
       where: 'id = ?',
       whereArgs: [model.id],
     );
+  }
+
+  //
+
+  Future<int> getLastInsertedId() async {
+    List<Map<String, dynamic>> result = await _database.rawQuery(
+      'SELECT MAX(id) as max_id FROM projects',
+    );
+
+    int lastId = result.isNotEmpty ? result.first['max_id'] ?? 0 : 0;
+    return lastId;
+  }
+
+  void closeDatabase() {
+    _database.close();
   }
 }

@@ -2,25 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:pricer/Features/project_details/presentation/views/widgets/custom_project_details_bar.dart';
 import 'package:pricer/Features/project_details/presentation/views/widgets/manage_time_buttons.dart';
 import 'package:pricer/Features/project_details/presentation/views/widgets/time_counter.dart';
+import 'package:pricer/core/models/project_model.dart';
 
 class ProjectDetailsViewBody extends StatelessWidget {
-  const ProjectDetailsViewBody({super.key});
-
+  const ProjectDetailsViewBody({super.key, required this.projectModel});
+  final ProjectModel projectModel;
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomProjectDetailsBar(),
+          CustomProjectDetailsBar(
+            projectModel: projectModel,
+          ),
           SizedBox(
             height: 20,
           ),
           Align(
             alignment: Alignment.center,
             child: Text(
-              'Name Of Project',
+              projectModel.projectName,
               style: TextStyle(
                 fontSize: 28,
               ),
@@ -29,7 +32,7 @@ class ProjectDetailsViewBody extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Text(
-              'Client Name',
+              projectModel.clientName,
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -41,7 +44,7 @@ class ProjectDetailsViewBody extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Text(
-              r'50$',
+              '${projectModel.totalPrice}' r'$',
               style: TextStyle(fontSize: 50, color: Color(0xff008000)),
             ),
           ),
@@ -55,7 +58,7 @@ class ProjectDetailsViewBody extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Text(
-              r'Price per hour: 5$',
+              'Price per hour: ${projectModel.pricePerHour}' r'$',
               style: TextStyle(fontSize: 16),
             ),
           ),

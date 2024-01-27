@@ -7,6 +7,8 @@ final class ManageProjectsInitial extends ManageProjectsState {}
 
 final class AddProjectInitial extends ManageProjectsState {}
 
+final class GetProjectsDone extends ManageProjectsState {}
+
 final class AddProjectLoading extends ManageProjectsState {}
 
 final class AddProjectDone extends ManageProjectsState {}

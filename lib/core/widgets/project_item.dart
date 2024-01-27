@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pricer/Features/project_details/presentation/views/project_details_view.dart';
 import 'package:pricer/constans.dart';
+import 'package:pricer/core/models/project_model.dart';
 
 class ProjectItem extends StatelessWidget {
-  const ProjectItem({super.key, this.iconData = Icons.hourglass_bottom});
+  const ProjectItem(
+      {super.key,
+      this.iconData = Icons.hourglass_bottom,
+      required this.projectModel});
   final IconData iconData;
+  final ProjectModel projectModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,18 +32,18 @@ class ProjectItem extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const Text(
-              'Name Of Project',
-              style: TextStyle(
+            Text(
+              projectModel.projectName,
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            const Text(
-              'Client Name',
-              style: TextStyle(
+            Text(
+              projectModel.clientName,
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
@@ -55,7 +60,10 @@ class ProjectItem extends StatelessWidget {
                       backgroundColor: kSecond3Color,
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, ProjectDetailsView.id);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return ProjectDetailsView(projectModel: projectModel);
+                      }));
                     },
                     child: const Text(
                       'View',
@@ -63,9 +71,9 @@ class ProjectItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Text(
-                  r'70$',
-                  style: TextStyle(
+                Text(
+                  '${projectModel.totalPrice.toString()}' r'$',
+                  style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),

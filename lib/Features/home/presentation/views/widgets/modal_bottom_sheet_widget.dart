@@ -64,7 +64,10 @@ class ModalBottomSheetWidget extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            CuromizeAddButton(formKeys: _formKeys),
+            CuromizeAddButton(
+              formKeys: _formKeys,
+              controllers: _controllers,
+            ),
             const SizedBox(
               height: 20,
             ),

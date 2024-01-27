@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
 import 'package:pricer/constans.dart';
+import 'package:pricer/core/models/project_model.dart';
 import 'package:pricer/core/widgets/custom_snackbar.dart';
 
 class CuromizeEditButton extends StatelessWidget {
   const CuromizeEditButton({
     super.key,
     required List<GlobalKey<FormState>> formKeys,
+    required this.projectModel,
+    required this.controllers,
   }) : _formKeys = formKeys;
 
   final List<GlobalKey<FormState>> _formKeys;
-
+  final List<TextEditingController> controllers;
+  final ProjectModel projectModel;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -34,8 +40,16 @@ class CuromizeEditButton extends StatelessWidget {
     }
 
     if (isValid) {
+      projectModel.projectName = controllers[0].text;
+      projectModel.clientName = controllers[1].text;
+      projectModel.pricePerHour = num.parse(controllers[2].text);
+
+      BlocProvider.of<ManageProjectsCubit>(context).editProject(projectModel);
       Navigator.of(context).pop();
       cutomSnackBar(context, 'Edit Done.');
+      for (var controller in controllers) {
+        controller.clear();
+      }
     }
   }
 }

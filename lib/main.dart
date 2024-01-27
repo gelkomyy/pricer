@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pricer/Features/completed_projects/presentation/views/completed_projects_view.dart';
+import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
 import 'package:pricer/Features/home/presentation/views/home_view.dart';
 import 'package:pricer/Features/pending_projects/presentation/views/pending_projects_view.dart';
 import 'package:pricer/Features/project_details/presentation/views/project_details_view.dart';
@@ -14,17 +16,20 @@ class PricerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: '/home',
-      routes: {
-        '/home': (context) => const HomeView(),
-        CompletedProjectsView.id: (context) => const CompletedProjectsView(),
-        PendingProjectsView.id: (context) => const PendingProjectsView(),
-        ProjectDetailsView.id: (context) => const ProjectDetailsView(),
-      },
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: kPrimaryColor),
-      home: const HomeView(),
+    return BlocProvider(
+      create: (context) => ManageProjectsCubit(),
+      child: MaterialApp(
+        initialRoute: '/home',
+        routes: {
+          '/home': (context) => const HomeView(),
+          CompletedProjectsView.id: (context) => const CompletedProjectsView(),
+          PendingProjectsView.id: (context) => const PendingProjectsView(),
+        },
+        debugShowCheckedModeBanner: false,
+        theme:
+            ThemeData.dark().copyWith(scaffoldBackgroundColor: kPrimaryColor),
+        home: const HomeView(),
+      ),
     );
   }
 }

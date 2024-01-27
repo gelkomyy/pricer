@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pricer/Features/project_details/presentation/views/widgets/modal_bottom_sheet_edit_widget.dart';
 import 'package:pricer/constans.dart';
+import 'package:pricer/core/models/project_model.dart';
 
 class EditProject extends StatefulWidget {
-  const EditProject({super.key});
-
+  const EditProject({super.key, required this.projectModel});
+  final ProjectModel projectModel;
   @override
   State<EditProject> createState() => _EditProjectState();
 }
@@ -31,7 +32,10 @@ class _EditProjectState extends State<EditProject> {
             context: context,
             builder: (context) {
               return ModalBottomSheetEditWidget(
-                  formKeys: _formKeys, controllers: _controllers);
+                formKeys: _formKeys,
+                controllers: _controllers,
+                projectModel: widget.projectModel,
+              );
             });
       },
       child: const Card(
