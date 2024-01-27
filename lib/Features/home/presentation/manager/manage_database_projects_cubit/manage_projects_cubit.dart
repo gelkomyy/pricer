@@ -1,4 +1,5 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:meta/meta.dart';
 import 'package:pricer/core/models/project_model.dart';
 import 'package:pricer/core/utils/database_helper.dart';
@@ -9,8 +10,17 @@ class ManageProjectsCubit extends Cubit<ManageProjectsState> {
   ManageProjectsCubit() : super(ManageProjectsInitial());
   DatabaseHelper databaseHelper = DatabaseHelper();
   List<ProjectModel> projects = [];
+
+  Future<void> getAllProjects() async {
+    projects = await databaseHelper.getAllData();
+    emit(GetProjectsDone());
+  }
+
   Future<void> initializeDatabase() async {
+    emit(GetProjectsLoading());
     await databaseHelper.initializeDatabase();
+    await getAllProjects();
+    emit(GetProjectsDone());
   }
 
   Future<void> addProject(ProjectModel model) async {
@@ -35,11 +45,6 @@ class ManageProjectsCubit extends Cubit<ManageProjectsState> {
     } catch (e) {
       emit(EditProjectFailed());
     }
-  }
-
-  Future<void> getAllProjects() async {
-    projects = await databaseHelper.getAllData();
-    emit(GetProjectsDone());
   }
 
   Future<int> getLastInsertedId() async {

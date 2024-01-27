@@ -4,11 +4,12 @@ import 'package:pricer/Features/completed_projects/presentation/views/completed_
 import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
 import 'package:pricer/Features/home/presentation/views/home_view.dart';
 import 'package:pricer/Features/pending_projects/presentation/views/pending_projects_view.dart';
-import 'package:pricer/Features/project_details/presentation/views/project_details_view.dart';
 import 'package:pricer/constans.dart';
+import 'package:pricer/core/utils/custom_bloc_observer.dart';
 
 void main() {
   runApp(const PricerApp());
+  Bloc.observer = CustomBlocObserver();
 }
 
 class PricerApp extends StatelessWidget {

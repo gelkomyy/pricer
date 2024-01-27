@@ -9,6 +9,8 @@ final class AddProjectInitial extends ManageProjectsState {}
 
 final class GetProjectsDone extends ManageProjectsState {}
 
+final class GetProjectsLoading extends ManageProjectsState {}
+
 final class AddProjectLoading extends ManageProjectsState {}
 
 final class AddProjectDone extends ManageProjectsState {}

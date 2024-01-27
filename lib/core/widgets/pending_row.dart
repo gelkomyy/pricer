@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
 import 'package:pricer/Features/pending_projects/presentation/views/pending_projects_view.dart';
 import 'package:pricer/constans.dart';
 import 'package:pricer/core/utils/check_screen_view.dart';

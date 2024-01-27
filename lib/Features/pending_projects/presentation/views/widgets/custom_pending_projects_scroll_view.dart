@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
 import 'package:pricer/core/widgets/custom_search_box.dart';
 import 'package:pricer/core/widgets/pending_row.dart';
 import 'package:pricer/core/widgets/project_grid_pending.dart';
 
-class CustomPendingProjectsScrollView extends StatelessWidget {
+class CustomPendingProjectsScrollView extends StatefulWidget {
   const CustomPendingProjectsScrollView({
     super.key,
   });
+
+  @override
+  State<CustomPendingProjectsScrollView> createState() =>
+      _CustomPendingProjectsScrollViewState();
+}
+
+class _CustomPendingProjectsScrollViewState
+    extends State<CustomPendingProjectsScrollView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<ManageProjectsCubit>(context).initializeDatabase();
+  }
 
   @override
   Widget build(BuildContext context) {
