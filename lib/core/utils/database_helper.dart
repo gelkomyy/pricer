@@ -17,11 +17,19 @@ class DatabaseHelper {
       join(await getDatabasesPath(), 'my_projects.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE projects(id INTEGER PRIMARY KEY, status TEXT, projectName TEXT, clientName TEXT, totalPrice REAL, totalHours REAL, pricePerHour REAL)',
+          'CREATE TABLE projects(id INTEGER PRIMARY KEY, status TEXT, projectName TEXT, clientName TEXT, totalPrice REAL, pricePerHour REAL, hours REAL,minutes REAL)',
         );
       },
       version: 1,
     );
+
+    /* 
+
+    // Delete the database file
+    closeDatabase();
+    await deleteDatabase(
+      join(await getDatabasesPath(), 'my_projects.db'),
+    ); */
   }
 
   //
@@ -48,7 +56,8 @@ class DatabaseHelper {
         projectName: maps[index]['projectName'],
         clientName: maps[index]['clientName'],
         totalPrice: maps[index]['totalPrice'],
-        totalHours: maps[index]['totalHours'],
+        hours: maps[index]['hours'],
+        minutes: maps[index]['minutes'],
         pricePerHour: maps[index]['pricePerHour'],
       );
     });

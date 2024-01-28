@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
@@ -12,12 +14,25 @@ class TimeCounter extends StatefulWidget {
     required this.projectModel,
   });
   final ProjectModel projectModel;
+
   @override
   State<TimeCounter> createState() => _TimeCounterState();
 }
 
 class _TimeCounterState extends State<TimeCounter> {
-  TimeModel? timeModel;
+  TimeModel? timeModel = TimeModel(hours: 0, minutes: 0, seconds: 0);
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +40,24 @@ class _TimeCounterState extends State<TimeCounter> {
       listener: (context, state) {
         if (state is TimeCounterUpdate) {
           timeModel = state.timeModel;
-          widget.projectModel.totalHours =
-              ((timeModel!.hours * 60) + timeModel!.minutes) / 60 ??
-                  widget.projectModel.totalHours;
+          widget.projectModel.hours =
+              timeModel!.hours ?? widget.projectModel.hours;
+          widget.projectModel.minutes =
+              timeModel!.minutes ?? widget.projectModel.minutes;
+
+          num totalHours =
+              ((widget.projectModel.hours * 60) + widget.projectModel.minutes) /
+                  60;
 
           widget.projectModel.totalPrice =
-              widget.projectModel.totalHours * widget.projectModel.pricePerHour;
-          Future.delayed(const Duration(seconds: 5), () {
-            BlocProvider.of<ManageProjectsCubit>(context)
-                .editProject(widget.projectModel);
-          });
+              totalHours * widget.projectModel.pricePerHour;
+
+          if (_timer == null || _timer!.isActive == false) {
+            _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+              BlocProvider.of<ManageProjectsCubit>(context)
+                  .editProject(widget.projectModel);
+            });
+          }
         }
       },
       builder: (context, state) {

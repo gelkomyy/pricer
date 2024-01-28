@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
+import 'package:pricer/Features/project_details/presentation/manager/time_counter_cubit/time_counter_cubit.dart';
 import 'package:pricer/Features/project_details/presentation/views/widgets/custom_project_details_bar.dart';
 import 'package:pricer/Features/project_details/presentation/views/widgets/manage_time_buttons.dart';
 import 'package:pricer/Features/project_details/presentation/views/widgets/time_counter.dart';
@@ -14,81 +15,85 @@ class ProjectDetailsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ManageProjectsCubit, ManageProjectsState>(
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomProjectDetailsBar(
-                projectModel: projectModel,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  projectModel.projectName,
-                  style: const TextStyle(
-                    fontSize: 28,
+        return BlocBuilder<TimeCounterCubit, TimeCounterState>(
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomProjectDetailsBar(
+                    projectModel: projectModel,
                   ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  projectModel.clientName,
-                  style: const TextStyle(
-                    fontSize: 16,
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  '${projectModel.totalPrice}' r'$',
-                  style:
-                      const TextStyle(fontSize: 50, color: Color(0xff008000)),
-                ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              TimeCounter(
-                projectModel: projectModel,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Price per hour: ${projectModel.pricePerHour}' r'$',
-                  style: const TextStyle(fontSize: 16),
-                ),
-              ),
-              const Spacer(),
-              projectModel.status == ProjectStatus.pending
-                  ? ManageTimeButtons(
-                      projectModel: projectModel,
-                    )
-                  : const Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 30),
-                        child: Text(
-                          'Completed Project √',
-                          style: TextStyle(fontSize: 18),
-                        ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      projectModel.projectName,
+                      style: const TextStyle(
+                        fontSize: 28,
                       ),
                     ),
-              const SizedBox(
-                height: 30,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      projectModel.clientName,
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      '${projectModel.totalPrice.toStringAsFixed(2)}' r'$',
+                      style: const TextStyle(
+                          fontSize: 50, color: Color(0xff008000)),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  TimeCounter(
+                    projectModel: projectModel,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Price per hour: ${projectModel.pricePerHour}' r'$',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  const Spacer(),
+                  projectModel.status == ProjectStatus.pending
+                      ? ManageTimeButtons(
+                          projectModel: projectModel,
+                        )
+                      : const Center(
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 30),
+                            child: Text(
+                              'Completed Project √',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         );
       },
     );

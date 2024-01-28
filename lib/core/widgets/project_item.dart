@@ -72,7 +72,7 @@ class ProjectItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${projectModel.totalPrice.toString()}' r'$',
+                  '${projectModel.totalPrice.toStringAsFixed(2)}' r'$',
                   style: const TextStyle(
                     fontSize: 16,
                   ),

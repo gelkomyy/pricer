@@ -37,7 +37,7 @@ class ManageTimeButtons extends StatelessWidget {
                 BlocProvider.of<TimeCounterCubit>(context).playTime();
               },
               child: Icon(
-                BlocProvider.of<TimeCounterCubit>(context).stopwatch.isRunning
+                BlocProvider.of<TimeCounterCubit>(context).counterIsRunning
                     ? Icons.pause_circle
                     : Icons.play_circle,
                 color: kSecond3Color,

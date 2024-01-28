@@ -16,7 +16,8 @@ class ProjectDetailsView extends StatelessWidget {
       backgroundColor: kPrimaryColor,
       body: SafeArea(
           child: BlocProvider(
-        create: (context) => TimeCounterCubit(),
+        create: (context) =>
+            TimeCounterCubit(projectModel.minutes.toInt() * 60),
         child: ProjectDetailsViewBody(
           projectModel: projectModel,
         ),

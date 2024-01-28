@@ -45,15 +45,17 @@ class CuromizeAddButton extends StatelessWidget {
       num pricePerHour = num.parse(controllers[2].text);
       int lastId = await BlocProvider.of<ManageProjectsCubit>(context)
           .getLastInsertedId();
-      await BlocProvider.of<ManageProjectsCubit>(context).addProject(
-          ProjectModel(
-              pricePerHour: pricePerHour,
-              id: lastId + 1,
-              status: ProjectStatus.pending,
-              projectName: projectName,
-              clientName: clientName,
-              totalPrice: 0,
-              totalHours: 0));
+      await BlocProvider.of<ManageProjectsCubit>(context)
+          .addProject(ProjectModel(
+        pricePerHour: pricePerHour,
+        id: lastId + 1,
+        status: ProjectStatus.pending,
+        projectName: projectName,
+        clientName: clientName,
+        totalPrice: 0,
+        hours: 0,
+        minutes: 0,
+      ));
       Navigator.of(context).pop();
 
       cutomSnackBar(context, 'Add Done.');

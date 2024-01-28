@@ -4,8 +4,9 @@ class ProjectModel {
   String projectName;
   String clientName;
   num totalPrice;
-  num totalHours;
   num pricePerHour;
+  num hours;
+  num minutes;
 
   ProjectModel({
     required this.pricePerHour,
@@ -14,7 +15,8 @@ class ProjectModel {
     required this.projectName,
     required this.clientName,
     required this.totalPrice,
-    required this.totalHours,
+    required this.hours,
+    required this.minutes,
   });
 
   Map<String, dynamic> toMap() {
@@ -24,8 +26,9 @@ class ProjectModel {
       'projectName': projectName,
       'clientName': clientName,
       'totalPrice': totalPrice,
-      'totalHours': totalHours,
       'pricePerHour': pricePerHour,
+      'hours': hours,
+      'minutes': minutes,
     };
   }
 }

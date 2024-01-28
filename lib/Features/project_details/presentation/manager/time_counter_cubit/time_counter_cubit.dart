@@ -2,21 +2,30 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:pricer/core/models/time_model.dart';
-
 part 'time_counter_state.dart';
 
 class TimeCounterCubit extends Cubit<TimeCounterState> {
+  late final Timer _timer;
   // Initialize the timer in the constructor
-  TimeCounterCubit() : super(TimeCounterInitial()) {
-    _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
+  TimeCounterCubit(this.secondsCount) : super(TimeCounterInitial()) {
+    emit(TimeCounterUpdate(getFormattedTime()));
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       // Emit the elapsed time periodically
       emit(TimeCounterUpdate(getFormattedTime()));
     });
   }
-  late final Timer _timer;
-  Stopwatch stopwatch = Stopwatch();
-  TimeModel getFormattedTime() {
-    var milli = stopwatch.elapsed.inMilliseconds;
+
+  int secondsCount;
+  bool counterIsRunning = false;
+  TimeModel getFormattedTime({bool isReset = false}) {
+    if (counterIsRunning) {
+      secondsCount += 1;
+    }
+    if (isReset) {
+      secondsCount = 0;
+    }
+
+    var milli = secondsCount * 1000;
     int seconds = (milli ~/ 1000) % 60;
     int minutes = ((milli ~/ 1000) ~/ 60) % 60;
     int hours = ((milli ~/ 1000) ~/ 3600);
@@ -28,21 +37,23 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
   }
 
   playTime() {
-    if (stopwatch.isRunning) {
+    //   secondsCount = setcount;
+    if (counterIsRunning) {
       stopTime();
     } else {
-      stopwatch.start();
+      counterIsRunning = true;
       emit(TimeCounterPlay());
     }
   }
 
   stopTime() {
-    stopwatch.stop();
+    counterIsRunning = false;
     emit(TimeCounterStop());
   }
 
   resetTime() {
-    stopwatch.reset();
+    //  stopwatch.reset();
+    emit(TimeCounterUpdate(getFormattedTime(isReset: true)));
     emit(TimeCounterReset());
   }
 
