@@ -2,7 +2,7 @@
     <application
         android:label="pricer"
         android:name="${applicationName}"
-        android:icon="@mipmap/costperhour">
+        android:icon="@mipmap/ic_launcher">
          
         <activity
             android:name=".MainActivity"
