@@ -4,8 +4,10 @@ import 'package:pricer/core/models/project_model.dart';
 import 'package:pricer/core/utils/status_project.dart';
 
 class CustomDropDown extends StatelessWidget {
-  const CustomDropDown({super.key, required this.projectModel});
+  const CustomDropDown(
+      {super.key, required this.projectModel, required this.color});
   final ProjectModel projectModel;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
@@ -31,7 +33,9 @@ class CustomDropDown extends StatelessWidget {
                 value == ProjectStatus.pending
                     ? Icons.hourglass_bottom
                     : Icons.task_alt,
-                color: kSecond3Color,
+                color: value == ProjectStatus.pending
+                    ? kSecond3Color
+                    : const Color(0xff28A745),
                 size: 30,
               ),
               const SizedBox(

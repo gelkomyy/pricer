@@ -7,9 +7,11 @@ class ProjectItem extends StatelessWidget {
   const ProjectItem(
       {super.key,
       this.iconData = Icons.hourglass_bottom,
-      required this.projectModel});
+      required this.projectModel,
+      required this.color});
   final IconData iconData;
   final ProjectModel projectModel;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +29,7 @@ class ProjectItem extends StatelessWidget {
             const Spacer(),
             Icon(
               iconData,
-              color: kSecond3Color,
+              color: color,
             ),
             const SizedBox(
               height: 10,
@@ -57,12 +59,13 @@ class ProjectItem extends StatelessWidget {
                   height: 30,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: kSecond3Color,
+                      backgroundColor: color,
                     ),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return ProjectDetailsView(projectModel: projectModel);
+                        return ProjectDetailsView(
+                            projectModel: projectModel, color: color);
                       }));
                     },
                     child: const Text(

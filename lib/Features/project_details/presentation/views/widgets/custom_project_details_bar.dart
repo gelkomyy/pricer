@@ -8,8 +8,10 @@ class CustomProjectDetailsBar extends StatelessWidget {
   const CustomProjectDetailsBar({
     super.key,
     required this.projectModel,
+    required this.color,
   });
   final ProjectModel projectModel;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,11 +21,12 @@ class CustomProjectDetailsBar extends StatelessWidget {
           projectModel.status == ProjectStatus.pending
               ? Icons.hourglass_bottom
               : Icons.task_alt,
-          color: kSecond3Color,
+          color: color,
           size: 36,
         ),
         EditProject(
           projectModel: projectModel,
+          color: color,
         ),
       ],
     );

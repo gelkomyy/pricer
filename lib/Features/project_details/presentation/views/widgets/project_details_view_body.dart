@@ -9,8 +9,10 @@ import 'package:pricer/core/models/project_model.dart';
 import 'package:pricer/core/utils/status_project.dart';
 
 class ProjectDetailsViewBody extends StatelessWidget {
-  const ProjectDetailsViewBody({super.key, required this.projectModel});
+  const ProjectDetailsViewBody(
+      {super.key, required this.projectModel, required this.color});
   final ProjectModel projectModel;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ManageProjectsCubit, ManageProjectsState>(
@@ -23,6 +25,7 @@ class ProjectDetailsViewBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomProjectDetailsBar(
+                    color: color,
                     projectModel: projectModel,
                   ),
                   const SizedBox(
@@ -73,9 +76,20 @@ class ProjectDetailsViewBody extends StatelessWidget {
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Seconds don\'t count',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ),
                   const Spacer(),
                   projectModel.status == ProjectStatus.pending
                       ? ManageTimeButtons(
+                          color: color,
                           projectModel: projectModel,
                         )
                       : const Center(

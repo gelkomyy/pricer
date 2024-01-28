@@ -11,16 +11,18 @@ class CuromizeEditButton extends StatelessWidget {
     required List<GlobalKey<FormState>> formKeys,
     required this.projectModel,
     required this.controllers,
+    required this.color,
   }) : _formKeys = formKeys;
 
   final List<GlobalKey<FormState>> _formKeys;
   final List<TextEditingController> controllers;
   final ProjectModel projectModel;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-            fixedSize: const Size(150, 30), backgroundColor: kSecond2Color),
+            fixedSize: const Size(150, 30), backgroundColor: color),
         onPressed: () {
           onTapAdd(context);
         },

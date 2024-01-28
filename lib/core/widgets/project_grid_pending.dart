@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
+import 'package:pricer/constans.dart';
 import 'package:pricer/core/models/project_model.dart';
 import 'package:pricer/core/utils/check_screen_view.dart';
 import 'package:pricer/core/utils/status_project.dart';
@@ -15,6 +16,10 @@ class ProjectsGridPending extends StatefulWidget {
 
 class _ProjectsGridPendingState extends State<ProjectsGridPending> {
   List<ProjectModel> projects = [];
+  List<Color> colorsList = [
+    const Color(0xff28A745),
+    kSecond3Color,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +53,9 @@ class _ProjectsGridPendingState extends State<ProjectsGridPending> {
                 crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 10),
             itemBuilder: ((context, index) {
               return ProjectItem(
+                color: pendingProjects[index].status == ProjectStatus.pending
+                    ? colorsList[1]
+                    : colorsList[0],
                 projectModel: pendingProjects[index],
                 iconData: pendingProjects[index].status == ProjectStatus.pending
                     ? Icons.hourglass_bottom

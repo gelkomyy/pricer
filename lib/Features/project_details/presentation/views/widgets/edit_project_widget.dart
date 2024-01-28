@@ -4,8 +4,10 @@ import 'package:pricer/constans.dart';
 import 'package:pricer/core/models/project_model.dart';
 
 class EditProject extends StatefulWidget {
-  const EditProject({super.key, required this.projectModel});
+  const EditProject(
+      {super.key, required this.projectModel, required this.color});
   final ProjectModel projectModel;
+  final Color color;
   @override
   State<EditProject> createState() => _EditProjectState();
 }
@@ -36,15 +38,16 @@ class _EditProjectState extends State<EditProject> {
             context: context,
             builder: (context) {
               return ModalBottomSheetEditWidget(
+                color: widget.color,
                 formKeys: _formKeys,
                 controllers: _controllers,
                 projectModel: widget.projectModel,
               );
             });
       },
-      child: const Card(
-        color: kSecond3Color,
-        child: Icon(
+      child: Card(
+        color: widget.color,
+        child: const Icon(
           Icons.edit,
           color: kPrimaryColor,
           size: 38,

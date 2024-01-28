@@ -6,9 +6,11 @@ import 'package:pricer/constans.dart';
 import 'package:pricer/core/models/project_model.dart';
 
 class ProjectDetailsView extends StatelessWidget {
-  const ProjectDetailsView({super.key, required this.projectModel});
+  const ProjectDetailsView(
+      {super.key, required this.projectModel, required this.color});
   static String id = 'ProjectDetailsView';
   final ProjectModel projectModel;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +21,7 @@ class ProjectDetailsView extends StatelessWidget {
         create: (context) =>
             TimeCounterCubit(projectModel.minutes.toInt() * 60),
         child: ProjectDetailsViewBody(
+          color: color,
           projectModel: projectModel,
         ),
       )),

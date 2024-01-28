@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pricer/Features/home/presentation/manager/manage_database_projects_cubit/manage_projects_cubit.dart';
+import 'package:pricer/constans.dart';
 import 'package:pricer/core/models/project_model.dart';
 import 'package:pricer/core/utils/check_screen_view.dart';
 import 'package:pricer/core/utils/status_project.dart';
@@ -15,7 +16,10 @@ class ProjectsGridDone extends StatefulWidget {
 
 class _ProjectsGridDoneState extends State<ProjectsGridDone> {
   List<ProjectModel> projects = [];
-
+  List<Color> colorsList = [
+    const Color(0xff28A745),
+    kSecond3Color,
+  ];
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ManageProjectsCubit, ManageProjectsState>(
@@ -48,6 +52,9 @@ class _ProjectsGridDoneState extends State<ProjectsGridDone> {
                 crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 10),
             itemBuilder: ((context, index) {
               return ProjectItem(
+                color: doneProjects[index].status == ProjectStatus.pending
+                    ? colorsList[1]
+                    : colorsList[0],
                 projectModel: doneProjects[index],
                 iconData: doneProjects[index].status == ProjectStatus.pending
                     ? Icons.hourglass_bottom

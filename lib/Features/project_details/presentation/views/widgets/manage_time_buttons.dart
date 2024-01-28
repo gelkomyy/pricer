@@ -10,8 +10,10 @@ class ManageTimeButtons extends StatelessWidget {
   const ManageTimeButtons({
     super.key,
     required this.projectModel,
+    required this.color,
   });
   final ProjectModel projectModel;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -21,9 +23,9 @@ class ManageTimeButtons extends StatelessWidget {
           onTap: () {
             BlocProvider.of<TimeCounterCubit>(context).resetTime();
           },
-          child: const Card(
-            color: kSecond3Color,
-            child: Icon(
+          child: Card(
+            color: color,
+            child: const Icon(
               Icons.refresh,
               color: kPrimaryColor,
               size: 35,
@@ -40,7 +42,7 @@ class ManageTimeButtons extends StatelessWidget {
                 BlocProvider.of<TimeCounterCubit>(context).counterIsRunning
                     ? Icons.pause_circle
                     : Icons.play_circle,
-                color: kSecond3Color,
+                color: color,
                 size: 80,
               ),
             );
@@ -53,9 +55,9 @@ class ManageTimeButtons extends StatelessWidget {
             BlocProvider.of<ManageProjectsCubit>(context)
                 .editProject(projectModel);
           },
-          child: const Card(
-            color: kSecond3Color,
-            child: Icon(
+          child: Card(
+            color: color,
+            child: const Icon(
               Icons.check,
               color: kPrimaryColor,
               size: 45,
