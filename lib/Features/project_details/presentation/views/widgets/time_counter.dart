@@ -40,10 +40,8 @@ class _TimeCounterState extends State<TimeCounter> {
       listener: (context, state) {
         if (state is TimeCounterUpdate) {
           timeModel = state.timeModel;
-          widget.projectModel.hours =
-              timeModel!.hours ?? widget.projectModel.hours;
-          widget.projectModel.minutes =
-              timeModel!.minutes ?? widget.projectModel.minutes;
+          widget.projectModel.hours = timeModel!.hours;
+          widget.projectModel.minutes = timeModel!.minutes;
 
           num totalHours =
               ((widget.projectModel.hours * 60) + widget.projectModel.minutes) /
@@ -53,7 +51,7 @@ class _TimeCounterState extends State<TimeCounter> {
               totalHours * widget.projectModel.pricePerHour;
 
           if (_timer == null || _timer!.isActive == false) {
-            _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+            _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
               BlocProvider.of<ManageProjectsCubit>(context)
                   .editProject(widget.projectModel);
             });
@@ -71,14 +69,13 @@ class _TimeCounterState extends State<TimeCounter> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '${timeModel?.hours.toString().padLeft(2, '0')}:${timeModel?.minutes.toString().padLeft(2, '0')}' ??
-                    '00:00',
+                '${timeModel?.hours.toString().padLeft(2, '0')}:${timeModel?.minutes.toString().padLeft(2, '0')}',
                 style: const TextStyle(
                   fontSize: 90,
                 ),
               ),
               Text(
-                ':${timeModel?.seconds.toString().padLeft(2, '0')}' ?? ':00',
+                ':${timeModel?.seconds.toString().padLeft(2, '0')}',
                 style: const TextStyle(
                   fontSize: 30,
                 ),
