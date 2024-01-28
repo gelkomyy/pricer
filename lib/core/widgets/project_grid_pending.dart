@@ -16,10 +16,6 @@ class ProjectsGridPending extends StatefulWidget {
 
 class _ProjectsGridPendingState extends State<ProjectsGridPending> {
   List<ProjectModel> projects = [];
-  List<Color> colorsList = [
-    const Color(0xff28A745),
-    kSecond3Color,
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +49,9 @@ class _ProjectsGridPendingState extends State<ProjectsGridPending> {
                 crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 10),
             itemBuilder: ((context, index) {
               return ProjectItem(
-                color: pendingProjects[index].status == ProjectStatus.pending
-                    ? colorsList[1]
-                    : colorsList[0],
+                color: pendingProjects[index].status == ProjectStatus.completed
+                    ? kDoneColor
+                    : kPendingColor,
                 projectModel: pendingProjects[index],
                 iconData: pendingProjects[index].status == ProjectStatus.pending
                     ? Icons.hourglass_bottom

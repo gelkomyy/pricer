@@ -9,6 +9,8 @@ final class TimeCounterDone extends TimeCounterState {}
 
 final class TimeCounterReset extends TimeCounterState {}
 
+final class ChangeColor extends TimeCounterState {}
+
 final class TimeCounterPlay extends TimeCounterState {}
 
 final class TimeCounterStop extends TimeCounterState {}

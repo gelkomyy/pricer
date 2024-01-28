@@ -31,7 +31,7 @@ class CustomTextBox extends StatelessWidget {
         controller: controller,
         cursorHeight: 15,
         cursorOpacityAnimates: true,
-        cursorColor: kSecond3Color,
+        cursorColor: kPendingColor,
         style: const TextStyle(
           height: 0.7,
           color: Colors.black,
@@ -63,7 +63,7 @@ class CustomTextBox extends StatelessWidget {
   OutlineInputBorder focusBorder() {
     return OutlineInputBorder(
       borderSide: const BorderSide(
-          color: kSecond3Color, style: BorderStyle.solid, width: 2),
+          color: kPendingColor, style: BorderStyle.solid, width: 2),
       borderRadius: BorderRadius.circular(18),
     );
   }

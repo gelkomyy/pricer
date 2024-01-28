@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pricer/Features/project_details/presentation/manager/time_counter_cubit/time_counter_cubit.dart';
 import 'package:pricer/Features/project_details/presentation/views/widgets/modal_bottom_sheet_edit_widget.dart';
 import 'package:pricer/constans.dart';
 import 'package:pricer/core/models/project_model.dart';
@@ -37,11 +39,14 @@ class _EditProjectState extends State<EditProject> {
             useSafeArea: true,
             context: context,
             builder: (context) {
-              return ModalBottomSheetEditWidget(
-                color: widget.color,
-                formKeys: _formKeys,
-                controllers: _controllers,
-                projectModel: widget.projectModel,
+              return BlocProvider(
+                create: (context) =>
+                    TimeCounterCubit(widget.projectModel.minutes.toInt() * 60),
+                child: ModalBottomSheetEditWidget(
+                  formKeys: _formKeys,
+                  controllers: _controllers,
+                  projectModel: widget.projectModel,
+                ),
               );
             });
       },

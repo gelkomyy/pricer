@@ -12,13 +12,12 @@ class ModalBottomSheetEditWidget extends StatelessWidget {
     required List<GlobalKey<FormState>> formKeys,
     required List<TextEditingController> controllers,
     required this.projectModel,
-    required this.color,
   })  : _formKeys = formKeys,
         _controllers = controllers;
   final ProjectModel projectModel;
   final List<GlobalKey<FormState>> _formKeys;
   final List<TextEditingController> _controllers;
-  final Color color;
+  static String? statusValue;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -44,7 +43,6 @@ class ModalBottomSheetEditWidget extends StatelessWidget {
               height: 50,
             ),
             CustomDropDown(
-              color: color,
               projectModel: projectModel,
             ),
             const SizedBox(
@@ -78,7 +76,6 @@ class ModalBottomSheetEditWidget extends StatelessWidget {
               height: 30,
             ),
             CuromizeEditButton(
-              color: color,
               formKeys: _formKeys,
               controllers: _controllers,
               projectModel: projectModel,

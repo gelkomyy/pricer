@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:pricer/Features/project_details/presentation/views/widgets/modal_bottom_sheet_edit_widget.dart';
 import 'package:pricer/constans.dart';
 import 'package:pricer/core/models/project_model.dart';
 import 'package:pricer/core/utils/status_project.dart';
 
 class CustomDropDown extends StatelessWidget {
-  const CustomDropDown(
-      {super.key, required this.projectModel, required this.color});
+  const CustomDropDown({
+    super.key,
+    required this.projectModel,
+  });
   final ProjectModel projectModel;
-  final Color color;
+
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
@@ -19,7 +22,10 @@ class CustomDropDown extends StatelessWidget {
       // elevation: 0,
       value: projectModel.status,
       onChanged: (String? newValue) {
-        projectModel.status = newValue ?? projectModel.status;
+        //   projectModel.status = newValue ?? projectModel.status;
+        ModalBottomSheetEditWidget.statusValue = projectModel.status;
+        ModalBottomSheetEditWidget.statusValue =
+            newValue ?? projectModel.status;
       },
       items: <String>[
         ProjectStatus.pending,
@@ -33,9 +39,9 @@ class CustomDropDown extends StatelessWidget {
                 value == ProjectStatus.pending
                     ? Icons.hourglass_bottom
                     : Icons.task_alt,
-                color: value == ProjectStatus.pending
-                    ? kSecond3Color
-                    : const Color(0xff28A745),
+                color: value == ProjectStatus.completed
+                    ? kDoneColor
+                    : kPendingColor,
                 size: 30,
               ),
               const SizedBox(

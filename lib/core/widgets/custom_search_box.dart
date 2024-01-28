@@ -9,7 +9,7 @@ class CustomSearchBox extends StatelessWidget {
     return TextField(
       cursorHeight: 13,
       cursorOpacityAnimates: true,
-      cursorColor: kSecond3Color,
+      cursorColor: kPendingColor,
       style: const TextStyle(
         height: 0.5,
         color: Colors.black,
@@ -40,7 +40,7 @@ class CustomSearchBox extends StatelessWidget {
   OutlineInputBorder focusBorder() {
     return OutlineInputBorder(
       borderSide: const BorderSide(
-          color: kSecond3Color, style: BorderStyle.solid, width: 2),
+          color: kPendingColor, style: BorderStyle.solid, width: 2),
       borderRadius: BorderRadius.circular(20),
     );
   }

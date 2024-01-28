@@ -21,7 +21,6 @@ class ProjectDetailsView extends StatelessWidget {
         create: (context) =>
             TimeCounterCubit(projectModel.minutes.toInt() * 60),
         child: ProjectDetailsViewBody(
-          color: color,
           projectModel: projectModel,
         ),
       )),
