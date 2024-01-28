@@ -13,10 +13,17 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
     BlocProvider.of<ManageProjectsCubit>(context).initializeDatabase();
+    Future.delayed(const Duration(seconds: 3), () {
+      // After 3 seconds, update the isLoading state
+      setState(() {
+        isLoading = false;
+      });
+    });
   }
 
   @override
@@ -29,7 +36,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       }, */
       builder: (context, state) {
         return LoadingOverlay(
-          isLoading: state is GetProjectsLoading,
+          isLoading: isLoading || state is GetProjectsLoading,
           child: const Stack(
             children: [
               Padding(

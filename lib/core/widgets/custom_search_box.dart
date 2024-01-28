@@ -6,6 +6,24 @@ class CustomSearchBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.price_change,
+          size: 30,
+          color: Color.fromARGB(255, 82, 220, 255),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Text(
+          'ElKoMy Pricer',
+          style: TextStyle(fontSize: 20),
+        ),
+      ],
+    );
+
     return TextField(
       cursorHeight: 13,
       cursorOpacityAnimates: true,
